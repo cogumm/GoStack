@@ -1,0 +1,17 @@
+{
+    "name": "modulo01",
+    "version": "1.0.0",
+    "description": "Fase 2",
+    "main": "index.js",
+    "author": "Gabriel \"CoGUMm\"",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon inde.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.1"
+    }
+}
