@@ -10,7 +10,7 @@ const users = ["Gabriel", "Henrique", "Juliana"];
 server.use((req, res, next) => {
     // Cálculo do tempo da instrução
     console.time("Request");
-    console.log(`Método: ${req.method}; URL: ${req.url}`);
+    console.log(`Método: ${req.method} na URL: ${req.url}`);
 
     //return next();
     next();
@@ -83,4 +83,6 @@ server.delete("/users/:index", checkUserInArray, (req, res) => {
     return res.send();
 });
 
-server.listen(3000);
+server.listen(3000, () => {
+    console.log("Servidor inicializado com sucesso na porta 3000");
+});
