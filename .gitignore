@@ -1,4 +1,8 @@
-# Módulo 02
+# Módulo 01
 modulo01/node_modules/
 modulo01/.vscode/
 modulo01/yarn.lock
+
+# Desafios
+desafios/desafio01/node_modules/
+desafios/desafio01/yarn.lock
