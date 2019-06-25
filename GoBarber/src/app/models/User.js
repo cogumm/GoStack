@@ -24,6 +24,11 @@ class User extends Model {
 		});
 		return this;
 	}
+
+	// Método para chegar a senha
+	checkPassword(pass) {
+		return bcrypt.compare(pass, this.pass_hash);
+	}
 }
 
 export default User;

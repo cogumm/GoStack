@@ -7,6 +7,14 @@
 	"scripts": {
 		"dev": "nodemon src/server.js"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+git@gitlab.com:cogumm/gostack.git"
+	},
+	"bugs": {
+		"email": "gabriel@cogumm.net"
+	},
+	"homepage": "https://github.com/cogumm/MrMeeseeks#README",
 	"devDependencies": {
 		"eslint": "^5.16.0",
 		"eslint-config-airbnb-base": "^13.1.0",
@@ -21,6 +29,7 @@
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
 		"pg": "^7.11.0",
 		"pg-hstore": "^2.3.3",
 		"sequelize": "^5.8.12"
