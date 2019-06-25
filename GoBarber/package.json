@@ -4,8 +4,12 @@
     "main": "index.js",
     "author": "Gabriel \"CoGUMm\"",
     "license": "MIT",
+    "scripts": {
+        "dev": "nodemon src/server.js"
+    },
     "devDependencies": {
-        "nodemon": "^1.19.1"
+        "nodemon": "^1.19.1",
+        "sucrase": "^3.10.1"
     },
     "dependencies": {
         "express": "^4.17.1"
