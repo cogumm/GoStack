@@ -6,3 +6,7 @@ modulo01/yarn.lock
 # Desafios
 desafios/desafio01/node_modules/
 desafios/desafio01/yarn.lock
+
+# GoBarber
+GoBarber/node_modules/
+GoBarber/yarn.lock
