@@ -9,12 +9,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+git@gitlab.com:cogumm/gostack.git"
+		"url": "git+https://github.com/cogumm/GoStack.git"
 	},
 	"bugs": {
+		"url": "https://github.com/cogumm/GoStack/issues",
 		"email": "gabriel@cogumm.net"
 	},
-	"homepage": "https://github.com/cogumm/MrMeeseeks#README",
+	"homepage": "https://github.com/cogumm/GoStack/issues#README",
 	"devDependencies": {
 		"eslint": "^5.16.0",
 		"eslint-config-airbnb-base": "^13.1.0",
