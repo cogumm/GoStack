@@ -42,6 +42,7 @@ class UserController {
 			oldPass: Yup.string().min(6),
 			pass: Yup.string()
 				.min(6)
+				// Validação condicional
 				.when('oldPass', (oldPass, field) =>
 					oldPass ? field.required() : field
 				),
