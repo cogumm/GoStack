@@ -2,14 +2,14 @@
 img/
 
 # Módulo 01
-modulo01/node_modules/
-modulo01/.vscode/
-modulo01/yarn.lock
+Conceitos/Dominando Node.js!/node_modules/
+Conceitos/Dominando Node.js!/.vscode/
+Conceitos/Dominando Node.js!/yarn.lock
 
 # Desafios
 desafios/desafio01/node_modules/
 desafios/desafio01/yarn.lock
 
 # GoBarber
-GoBarber/node_modules/
-GoBarber/yarn.lock
+GoBarber/backend/node_modules/
+GoBarber/backend/yarn.lock
