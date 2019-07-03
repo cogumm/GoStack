@@ -10,13 +10,26 @@ Repositório onde estarei colocando meu progresso do curso 🚀 Rocketseat GoSta
 
 | Semana    | Liberada em | Concluida |
 | --------- | ----------- | --------- |
-| Semana 01 | (24/06)     | ⚪️       |
-| Semana 02 | (01/07)     | 🔴        |
+| Semana 01 | (24/06)     | 🔵        |
+| Semana 02 | (01/07)     | ⚪️       |
 | Semana 03 | (08/07)     | 🔴        |
 | Semana 04 | (15/07)     | 🔴        |
 | Semana 05 | (22/07)     | 🔴        |
 | Semana 06 | (29/07)     | 🔴        |
 | Semana 07 | (05/08)     | 🔴        |
+
+#### Conceitos
+
+| Nome                | Concluida |
+| ------------------- | --------- |
+| Dominando Node.js!  | 🔵        |
+| Introdução ao React | ⚪️       |
+
+#### Bônus
+
+| Nome    | Concluida |
+| ------- | --------- |
+| Flexbox | ⚪️       |
 
 Legenda:
 
