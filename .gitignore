@@ -6,9 +6,14 @@ Conceitos/Dominando Node.js!/node_modules/
 Conceitos/Dominando Node.js!/.vscode/
 Conceitos/Dominando Node.js!/yarn.lock
 
+# Módulo 04
+Conceitos/Introdução ao React/node_modules/
+Conceitos/Introdução ao React/.vscode/
+Conceitos/Introdução ao React/yarn.lock
+
 # Desafios
-desafios/desafio01/node_modules/
-desafios/desafio01/yarn.lock
+Desafios/desafio01/node_modules/
+Desafios/desafio01/yarn.lock
 
 # GoBarber
 GoBarber/backend/node_modules/
