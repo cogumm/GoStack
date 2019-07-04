@@ -10,6 +10,7 @@ class TechList extends Component {
         this.setState({ newTech: e.target.value });
     };
 
+    // Função de "adicionar"
     handleSubmit = e => {
         e.preventDefault();
 
@@ -21,13 +22,27 @@ class TechList extends Component {
         });
     };
 
+    // Função de delete
+    handleDelete = tech => {
+        //console.log(tech);
+        this.setState({ techs: this.state.techs.filter(t => t !== tech) });
+    };
+
     render() {
         return (
             // Tag sem nome "fragment" <>
             <form onSubmit={this.handleSubmit}>
                 <ul>
                     {this.state.techs.map(tech => (
-                        <li key={tech}>{tech}</li>
+                        <li key={tech}>
+                            {tech}
+                            <button
+                                onClick={() => this.handleDelete(tech)}
+                                type="button"
+                            >
+                                Remover
+                            </button>
+                        </li>
                     ))}
                 </ul>
                 <input
