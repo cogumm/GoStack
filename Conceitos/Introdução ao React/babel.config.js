@@ -9,5 +9,9 @@ module.exports = {
          * Exemplo: jsx e outras funcionalidades do react
          */
         "@babel/preset-react"
-    ]
+    ],
+    /*
+     * Plugin para que o babel entenda as propriedades definidas diretamente dentro das class
+     */
+    plugins: ["@babel/plugin-proposal-class-properties"]
 };
