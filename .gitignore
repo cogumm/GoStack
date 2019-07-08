@@ -18,3 +18,10 @@ Desafios/desafio01/yarn.lock
 # GoBarber
 GoBarber/backend/node_modules/
 GoBarber/backend/yarn.lock
+# Frontend
+GoBarber/frontend/node_modules/
+GoBarber/frontend/yarn.lock
+# testing
+GoBarber/frontend/coverage
+# production
+GoBarber/frontend/build
