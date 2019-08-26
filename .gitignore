@@ -1,6 +1,11 @@
 # Imagens do README
 img/
 
+# Bônus
+Bônus/Server-side Rendering com NextJS/node_modules/
+Bônus/Server-side Rendering com NextJS/yarn.lock
+Bônus/Server-side Rendering com NextJS/.next/
+
 # Módulo 01
 Conceitos/Dominando Node.js!/node_modules/
 Conceitos/Dominando Node.js!/.vscode/
