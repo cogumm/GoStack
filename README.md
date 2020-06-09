@@ -1,62 +1,51 @@
-![GoStack](img/GoStack.png)
+<h1 align="center">
+    <img alt="GoStack" src=".github/goStack.png" width="200px" />
+</h1>
 
-# 🚀 GoStack
+# 🚀 Bootcamp GoStack
 
 Repositório onde estarei colocando meu progresso do curso 🚀 Rocketseat GoStack :shipit:
 
-> 🏷 Veja o progresso nos meus [commits](https://github.com/cogumm/GoStack/commits/master).
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/cogumm/GoStack?color=%2304D361">
 
-### 📚 Cronograma
+  <img alt="License" src="https://img.shields.io/badge/license-GPL3.0-%2304D361">
 
-| Semana    | Liberada em | Concluida |
-| --------- | ----------- | --------- |
-| Semana 01 | (24/06)     | 🔵        |
-| Semana 02 | (01/07)     | ⚪️       |
-| Semana 03 | (08/07)     | 🔴        |
-| Semana 04 | (15/07)     | 🔴        |
-| Semana 05 | (22/07)     | 🔴        |
-| Semana 06 | (29/07)     | 🔴        |
-| Semana 07 | (05/08)     | 🔴        |
+  <a href="https://github.com/cogumm/GoStack/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/cogumm/GoStack?style=social">
+  </a>
+</p>
 
-#### Conceitos
+<p align="center">
+  <a href="#">GoStack - O que é ?</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#">Instalação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#">Como contribuir</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-| Nome                | Concluida |
-| ------------------- | --------- |
-| Dominando Node.js!  | 🔵        |
-| Introdução ao React | ⚪️       |
+## :information_source: GoStack - O que é ?
 
-#### Bônus
+## 🚀 Tecnologias
 
-| Nome    | Concluida |
-| ------- | --------- |
-| Flexbox | ⚪️       |
+### :information_source: Instalação em construção :construction:
 
-Legenda:
-
-```
-🔵 - Concluída
-⚪️ - Realizando
-🔴 - Não iniciada
+```bash
+# Clonando o repositório
+$ git clone https://github.com/cogumm/GoStack
 ```
 
-## 🌀 Fase 1
+## 🤔 Como contribuir
 
-### 👨‍💻 Ambiente de desenvolvimento
+-   Realize um fork;
+-   Crie uma branch: `git checkout -b my-feature`;
+-   Envie suas mudanças: `git commit -m 'feat: My new feature'`;
+-   Faça um push da sua branch: `git push origin my-feature`.
 
-## 🌀 Fase 2 # GoBarber
+## :memo: Licença
 
-### 👨‍💻 Ambiente e conceitos
+Este projeto está sob licença GPL-3.0, para mais detales verifique em [LICENSE](gpl-3.0.md)
 
-### ⚔️ Desafio 01
+Feito com ♥ por Gabriel F. Vilar :wave: [Telegram][telegram]
 
-> Verifique o Desafio 01 [aqui](https://github.com/cogumm/GoStack/blob/master/desafios/desafio01/README.md)
-
-> ✅ [Solução](https://github.com/cogumm/GoStack/commit/bb898f3b5da36376ff34d9512483cf57d3738b35)
-
-### 👨‍💻 Iniciando back-end do GoBarber
-
-### ⚔️ Desafio 02
-
-### 👨‍💻 Continuando API do GoBarber
-
-### ⚔️ Desafio 03
+[telegram]: https://t.me/CoGUMm
