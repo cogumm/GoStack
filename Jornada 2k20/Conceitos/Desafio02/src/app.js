@@ -17,7 +17,7 @@ function findIndexRepository(id) {
 }
 
 app.get("/repositories", (req, res) => {
-    return res.json(repositories);
+    return res.status(200).json(repositories);
 });
 
 app.post("/repositories", (req, res) => {
@@ -33,7 +33,7 @@ app.post("/repositories", (req, res) => {
 
     repositories.push(repository);
 
-    return res.json(repository);
+    return res.status(201).json(repository);
 });
 
 app.put("/repositories/:id", (req, res) => {
@@ -54,7 +54,7 @@ app.put("/repositories/:id", (req, res) => {
         likes: repositories[repositoryIndex].likes,
     };
 
-    return res.json(repositories[repositoryIndex]);
+    return res.status(200).json(repositories[repositoryIndex]);
 });
 
 app.delete("/repositories/:id", (req, res) => {
@@ -71,7 +71,7 @@ app.delete("/repositories/:id", (req, res) => {
     return res.status(204).send();
 });
 
-app.post("/repositories/:id/likes", (req, res) => {
+app.post("/repositories/:id/like", (req, res) => {
     const { id } = req.params;
 
     const repositoryIndex = findIndexRepository(id);
@@ -82,7 +82,7 @@ app.post("/repositories/:id/likes", (req, res) => {
 
     repositories[repositoryIndex].likes += 1;
 
-    return res.json(repositories[repositoryIndex]);
+    return res.status(200).json(repositories[repositoryIndex]);
 });
 
 module.exports = app;
