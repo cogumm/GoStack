@@ -1,6 +1,9 @@
 import express from "express";
 import routes from "./routes";
 
+// Importando o database
+import "./database";
+
 const server = express();
 
 /**
