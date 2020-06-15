@@ -14,6 +14,10 @@ Repositório onde estarei colocando meu progresso do curso 🚀 Rocketseat GoSta
   <a href="https://github.com/cogumm/GoStack/stargazers">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/cogumm/GoStack?style=social">
   </a>
+
+  <a href="https://wakatime.com/badge/github/cogumm/GoStack">
+    <img src="https://wakatime.com/badge/github/cogumm/GoStack.svg">
+  </a>
 </p>
 
 <p align="center">
