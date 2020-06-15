@@ -1,0 +1,8 @@
+// Hack de Tipagem
+declare namespace Express {
+    export interface Request {
+        user: {
+            id: string;
+        };
+    }
+}
