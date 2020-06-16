@@ -6,7 +6,7 @@ import { parseISO } from "date-fns";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 // Importando o services.
 import CreateAppointmentService from "../services/CreateAppointmentService";
-
+// Certificando se o usuário está autenticado.
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const appointmentsRouter = Router();
