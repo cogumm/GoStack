@@ -4,6 +4,8 @@ import * as Yup from "yup";
 
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
+
+import { useAuth } from "../../hooks/AuthContext";
 import getValidationErrors from "../../utils/getValidationErros";
 
 import logo from "../../assets/logo.svg";
@@ -13,31 +15,49 @@ import Button from "../../components/Button";
 
 import { Container, Content, Background } from "./styles";
 
+interface SignInFormData {
+    email: string;
+    password: string;
+}
+
 const SignIn: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
-    const handleSubmit = useCallback(async (data: object) => {
-        try {
-            formRef.current?.setErrors({});
+    // Hook de context
+    const { singIn } = useAuth();
+    // console.log(auth);
+    // console.log(user);
 
-            const schema = Yup.object().shape({
-                email: Yup.string()
-                    .required("E-mail obrigatório.")
-                    .email("Digite um e-mail válido."),
-                password: Yup.string().required("Senha obrigatória."),
-            });
+    const handleSubmit = useCallback(
+        async (data: SignInFormData) => {
+            try {
+                formRef.current?.setErrors({});
 
-            await schema.validate(data, {
-                abortEarly: false,
-            });
-        } catch (err) {
-            console.log(err);
+                const schema = Yup.object().shape({
+                    email: Yup.string()
+                        .required("E-mail obrigatório.")
+                        .email("Digite um e-mail válido."),
+                    password: Yup.string().required("Senha obrigatória."),
+                });
 
-            const errors = getValidationErrors(err);
+                await schema.validate(data, {
+                    abortEarly: false,
+                });
 
-            formRef.current?.setErrors(errors);
-        }
-    }, []);
+                singIn({
+                    email: data.email,
+                    password: data.password,
+                });
+            } catch (err) {
+                console.log(err);
+
+                const errors = getValidationErrors(err);
+
+                formRef.current?.setErrors(errors);
+            }
+        },
+        [singIn],
+    );
     return (
         <Container>
             <Content>

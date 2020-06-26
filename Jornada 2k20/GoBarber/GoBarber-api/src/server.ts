@@ -1,6 +1,8 @@
 import "reflect-metadata";
 
 import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+
 import "express-async-errors";
 
 import routes from "./routes";
@@ -12,6 +14,8 @@ import AppError from "./errors/AppError";
 import "./database";
 
 const server = express();
+
+server.use(cors());
 
 /**
  * Utilizando o express para converter o JSON em objeto do JS/TS.
