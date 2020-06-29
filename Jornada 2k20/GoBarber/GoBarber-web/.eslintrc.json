@@ -29,6 +29,7 @@
         "prettier"
     ],
     "rules": {
+        "no-console": "off",
         "indent": [
             "off"
         ],
@@ -68,6 +69,15 @@
             {
                 "ts": "never",
                 "tsx": "never"
+            }
+        ],
+        "@typescript-eslint/ban-types": [
+            "warn",
+            {
+                "types": {
+                    "object": null,
+                    "Object": null
+                }
             }
         ]
     },
