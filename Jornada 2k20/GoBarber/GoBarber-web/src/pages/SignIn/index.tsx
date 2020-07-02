@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from "react";
 import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
@@ -31,6 +31,8 @@ const SignIn: React.FC = () => {
     // console.log(user);
     const { addToast } = useToast();
 
+    const history = useHistory();
+
     const handleSubmit = useCallback(
         async (data: SignInFormData) => {
             try {
@@ -51,6 +53,8 @@ const SignIn: React.FC = () => {
                     email: data.email,
                     password: data.password,
                 });
+
+                history.push("/dashboard");
             } catch (err) {
                 // console.log(err);
 
@@ -70,7 +74,7 @@ const SignIn: React.FC = () => {
                 });
             }
         },
-        [singIn, addToast],
+        [singIn, addToast, history],
     );
     return (
         <Container>
