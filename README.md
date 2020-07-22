@@ -48,7 +48,7 @@ $ git clone https://github.com/cogumm/GoStack
 
 ## :memo: Licença
 
-Este projeto está sob licença GPL-3.0, para mais detales verifique em [LICENSE](gpl-3.0.md)
+Este projeto está sob licença MIT, para mais detales verifique em [LICENSE](https://cogumm.mit-license.org/)
 
 Feito com ♥ por Gabriel F. Vilar :wave: [Telegram][telegram]
 
