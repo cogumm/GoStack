@@ -12,6 +12,8 @@ import AppError from "@shared/errors/AppError";
 
 // Importando o database
 import "@shared/infra/typeorm";
+// Importando o container
+import "@shared/container";
 
 const server = express();
 
