@@ -27,7 +27,7 @@ server.use(express.json());
 /**
  * Rota estática.
  */
-server.use("/files", express.static(uploadConfig.directory));
+server.use("/files", express.static(uploadConfig.uploadsFolder));
 
 /**
  * Rotas da aplicação.
