@@ -33,7 +33,7 @@ describe("Create Appointment", () => {
         });
 
         // Verificando como retornar um "erro"
-        expect(
+        await expect(
             createAppointment.execute({
                 date: appointmentData,
                 provider_id: "123456",

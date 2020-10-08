@@ -3,3 +3,6 @@ dist/
 tmp/*
 !tmp/.gitkeep
 yarn.lock
+
+
+README.md
