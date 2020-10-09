@@ -4,6 +4,7 @@ import appointmentsRouter from "@modules/appointments/infra/http/routes/appointm
 import usersRouter from "@modules/users/infra/http/routes/users.routes";
 import sessionsRouter from "@modules/users/infra/http/routes/sessions.routes";
 import passwordRouter from "@modules/users/infra/http/routes/password.routes";
+import profileRouter from "@modules/users/infra/http/routes/profile.routes";
 
 const routes = Router();
 
@@ -37,5 +38,10 @@ routes.use("/sessions", sessionsRouter);
  * Rota para resetar e esqueci senha
  */
 routes.use("/password", passwordRouter);
+
+/**
+ * Rota do perfil.
+ */
+routes.use("/profile", profileRouter);
 
 export default routes;
