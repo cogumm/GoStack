@@ -37,7 +37,7 @@ describe("Send forgot pass email", () => {
             email: "john@doe.com",
         });
 
-        expect(sendMail).toHaveBeenCalled();
+        await expect(sendMail).toHaveBeenCalled();
     });
 
     it("should be abele to recover a non-existing user password", async () => {
@@ -61,6 +61,6 @@ describe("Send forgot pass email", () => {
             email: "john@doe.com",
         });
 
-        expect(generateToken).toHaveBeenCalledWith(user.id);
+        await expect(generateToken).toHaveBeenCalledWith(user.id);
     });
 });
