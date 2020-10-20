@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import appointmentsRouter from "@modules/appointments/infra/http/routes/appointments.routes";
+import providersRouter from "@modules/appointments/infra/http/routes/providers.routes";
 import usersRouter from "@modules/users/infra/http/routes/users.routes";
 import sessionsRouter from "@modules/users/infra/http/routes/sessions.routes";
 import passwordRouter from "@modules/users/infra/http/routes/password.routes";
@@ -23,6 +24,11 @@ routes.get("/", (req, res) => {
  * Rota de agendamento.
  */
 routes.use("/appointments", appointmentsRouter);
+
+/**
+ * Rota para listar os prestadores de serviço.
+ */
+routes.use("/providers", providersRouter);
 
 /**
  * Rota de usuários.
