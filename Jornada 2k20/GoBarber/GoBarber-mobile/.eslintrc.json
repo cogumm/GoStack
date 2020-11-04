@@ -23,30 +23,24 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "react-hooks",
-        "prettier"
-    ],
+    "plugins": ["react", "@typescript-eslint", "react-hooks", "prettier"],
     "rules": {
-        "react/jsx-indent": [
-            "warn",
-            4
-        ],
-        "react/jsx-indent-props": [
+        "react/jsx-props-no-spreading": [
             "error",
-            4
+            {
+                "custom": "ignore"
+            }
         ],
+        "react/jsx-indent": ["warn", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/prop-types": "off",
         "prettier/prettier": "error",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-filename-extension": [
             1,
             {
-                "extensions": [
-                    ".tsx"
-                ]
+                "extensions": [".tsx"]
             }
         ],
         "import/prefer-default-export": "off",
