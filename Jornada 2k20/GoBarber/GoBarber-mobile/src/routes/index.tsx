@@ -1,8 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import SingIn from '../Pages/SignIn';
-import SingUp from '../Pages/SingUp';
+import SingIn from '../pages/SignIn';
+import SingUp from '../pages/SingUp';
 
 // Navegação para autenticação.
 const Auth = createStackNavigator();
