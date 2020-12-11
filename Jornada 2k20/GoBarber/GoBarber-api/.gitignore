@@ -6,4 +6,8 @@ yarn.lock
 
 
 README.md
+
+.docker/
+.dockerignore
+Dockerfile
 docker-compose.yml
