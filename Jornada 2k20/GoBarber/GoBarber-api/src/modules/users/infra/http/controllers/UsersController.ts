@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { classToClass } from "class-transformer";
 
 import CreateUserService from "@modules/users/services/CreateUserService";
 
@@ -15,9 +16,6 @@ export default class UsersController {
             password,
         });
 
-        // Não mostrando o campo senha.
-        delete user.password;
-
-        return res.json(user);
+        return res.json(classToClass(user));
     }
 }

@@ -1,8 +1,4 @@
-import path from "path";
-import fs from "fs";
 import { injectable, inject } from "tsyringe";
-
-import uploadConfig from "@config/upload";
 
 import AppError from "@shared/errors/AppError";
 import IStorageProvider from "@shared/container/providers/StorageProvider/models/IStorageProvider";
@@ -23,7 +19,7 @@ class UpdateUserAvatarService {
 
         @inject("StorageProvider")
         private storageProvider: IStorageProvider,
-    ) { }
+    ) {}
 
     public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
         const user = await this.usersRepository.findById(user_id);
@@ -41,7 +37,7 @@ class UpdateUserAvatarService {
         }
 
         // Se não salva o novo avatar.
-        const filename = await this.storageProvider.saveFile(avatarFilename)
+        const filename = await this.storageProvider.saveFile(avatarFilename);
 
         user.avatar = filename;
 
