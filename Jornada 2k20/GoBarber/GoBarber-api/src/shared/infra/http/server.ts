@@ -3,6 +3,8 @@ import "reflect-metadata";
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 
+import { errors } from "celebrate";
+
 import "express-async-errors";
 
 import routes from "./routes";
@@ -33,6 +35,11 @@ server.use("/files", express.static(uploadConfig.uploadsFolder));
  * Rotas da aplicação.
  */
 server.use(routes);
+
+/**
+ * Mensagens de erros do Celebrate.
+ */
+server.use(errors());
 
 /**
  * Middleware para tratativa dos erros.

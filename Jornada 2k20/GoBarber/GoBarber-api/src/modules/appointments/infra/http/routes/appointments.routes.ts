@@ -1,4 +1,6 @@
 import { Router } from "express";
+// Adicionando a validação utilizando o Celebrate.
+import { celebrate, Segments, Joi } from "celebrate";
 
 // Certificando se o usuário está autenticado.
 import ensureAuthenticated from "@modules/users/infra/http/middlewares/ensureAuthenticated";
@@ -19,7 +21,16 @@ appointmentsRouter.use(ensureAuthenticated);
     return res.json(appointments);
 }); */
 
-appointmentsRouter.post("/", appointmentsController.create);
+appointmentsRouter.post(
+    "/",
+    celebrate({
+        [Segments.BODY]: {
+            provider_id: Joi.string().uuid().required(),
+            date: Joi.date(),
+        },
+    }),
+    appointmentsController.create,
+);
 
 appointmentsRouter.post("/me", providerAppointmentsController.index);
 
