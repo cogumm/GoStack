@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "dotenv/config";
 
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
@@ -63,6 +64,9 @@ server.use((err: Error, req: Request, res: Response, _: NextFunction) => {
 /**
  * Rodando o servidor back-end.
  */
-server.listen(3001, () => {
-    console.log("Servidor backend inicializado com sucesso na porta " + 3001);
+server.listen(process.env.APP_PORT || 3000, () => {
+    console.log(
+        "Servidor backend inicializado com sucesso na porta " +
+            process.env.APP_PORT || 3000,
+    );
 });

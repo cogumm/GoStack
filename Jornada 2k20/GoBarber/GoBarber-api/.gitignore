@@ -9,6 +9,7 @@ yarn.lock
 .env.test.local
 .env.production.local
 
+ormconfig.json
 
 README.md
 

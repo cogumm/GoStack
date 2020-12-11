@@ -21,7 +21,7 @@ class SendForgotPassEmailService {
 
         @inject("UserTokensRepository")
         private userTokensRepository: IUserTokensRepository,
-    ) { }
+    ) {}
 
     public async execute({ email }: IRequest): Promise<void> {
         const user = await this.usersRepository.findByEmail(email);
@@ -33,7 +33,12 @@ class SendForgotPassEmailService {
         const { token } = await this.userTokensRepository.generate(user.id);
 
         // Importando o template da recureção de senha.
-        const forgotPassTemplate = path.resolve(__dirname, "..", "templates", "forgot_password.hbs");
+        const forgotPassTemplate = path.resolve(
+            __dirname,
+            "..",
+            "templates",
+            "forgot_password.hbs",
+        );
 
         await this.mailProvider.sendMail({
             to: {
@@ -45,9 +50,9 @@ class SendForgotPassEmailService {
                 file: forgotPassTemplate,
                 variables: {
                     name: user.name,
-                    link: `http://localhost:3000/reset_password?token=${token}`,
-                }
-            }
+                    link: `${process.env.APP_WEB_URL}/reset_password?token=${token}`,
+                },
+            },
         });
     }
 }
