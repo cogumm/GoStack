@@ -1,36 +1,8 @@
-import { container } from "tsyringe";
-import mailConfig from "@config/mail";
+// Importando o arquivo de template para e-mail;
+import "./MailTemplateProvider";
 
-import IStorageProvider from "./StorageProvider/models/IStorageProvider";
-import DiskStorageProvider from "./StorageProvider/implementations/DiskStorageProvider";
+// Importando o arquivo de configuração para envio de e-mail.
+import "./MailProvider";
 
-import IMailProvider from "./MailProvider/models/IMailProvider";
-import EtherealMailProvider from "./MailProvider/implementations/EtherealMailProvider";
-import SESMailProvider from "./MailProvider/implementations/SESMailProvider";
-
-import IMailTemplateProvider from "./MailTemplateProvider/models/IMailTemplateProvider";
-import HandlebarsMailTemplateProvider from "./MailTemplateProvider/implementations/HandlebarsMailTemplateProvider";
-
-container.registerSingleton<IStorageProvider>(
-    "StorageProvider",
-    DiskStorageProvider,
-);
-
-container.registerSingleton<IMailTemplateProvider>(
-    "MailTemplateProvider",
-    HandlebarsMailTemplateProvider,
-);
-
-/**
- * Por alguma maneira quando usa o registerSingleton ele não está criando uma nova
- * instância do EtherealMailProvider.
- *
- * O registerInstance continua sendo um Singleton no node.
- */
-container.registerInstance<IMailProvider>(
-    "MailProvider",
-    // Verificando se é Ethereal ou SES para enviar o email.
-    mailConfig.driver === "ethereal"
-        ? container.resolve(EtherealMailProvider)
-        : container.resolve(SESMailProvider),
-);
+// Importando o arquivo de configuração para salvar o avatar no disco.
+import "./StorageProvider";
