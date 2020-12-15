@@ -1,14 +1,14 @@
-import "reflect-metadata";
 import "dotenv/config";
-
-import express, { Request, Response, NextFunction } from "express";
-import cors from "cors";
-
-import { errors } from "celebrate";
-
+import "reflect-metadata";
 import "express-async-errors";
 
+import cors from "cors";
+import { errors } from "celebrate";
+import express, { Request, Response, NextFunction } from "express";
+
 import routes from "./routes";
+
+import rateLimiter from "./middlewares/rateLimiter";
 
 import uploadConfig from "@config/upload";
 import AppError from "@shared/errors/AppError";
@@ -20,6 +20,14 @@ import "@shared/container";
 
 const server = express();
 
+/**
+ * Express rate limit.
+ */
+server.use(rateLimiter);
+
+/**
+ * Ativando o CORS da aplicação.
+ */
 server.use(cors());
 
 /**
