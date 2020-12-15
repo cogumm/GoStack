@@ -6,3 +6,6 @@ import "./MailProvider";
 
 // Importando o arquivo de configuração para salvar o avatar no disco.
 import "./StorageProvider";
+
+// Importando o arquivo de configuração do Cache.
+import "./CacheProvider";
