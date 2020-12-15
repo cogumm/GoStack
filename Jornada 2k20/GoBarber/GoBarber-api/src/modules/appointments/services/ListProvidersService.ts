@@ -30,7 +30,7 @@ class ListProvidersService {
                 except_user_id: user_id,
             });
 
-            console.log("Cheguei no console log da query no Redis.");
+            // console.log("Cheguei no console log da query no Redis.");
 
             // Salvando o cache para cada usuário da aplicação, sem o usuário logado.
             await this.cacheProvider.saveCache(

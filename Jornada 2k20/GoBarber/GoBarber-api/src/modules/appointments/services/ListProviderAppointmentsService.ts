@@ -45,7 +45,7 @@ class ListProviderAppointmentsService {
                 },
             );
 
-            console.log("Buscou do Redis.");
+            // console.log("Buscou do Redis.");
 
             await this.cacheProvider.saveCache(cacheKey, appointments);
         }
