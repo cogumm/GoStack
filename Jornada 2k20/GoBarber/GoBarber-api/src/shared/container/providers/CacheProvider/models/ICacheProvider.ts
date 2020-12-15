@@ -4,4 +4,6 @@ export default interface ICacheProvider {
     recoverCache<T>(key: string): Promise<T | null>;
 
     invalidateCache(key: string): Promise<void>;
+
+    invalidatePrefixCache(prefix: string): Promise<void>;
 }
