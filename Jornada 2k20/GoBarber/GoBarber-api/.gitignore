@@ -1,7 +1,7 @@
 node_modules/
 dist/
-tmp/*
-!tmp/.gitkeep
+tmp/uploads/*
+!tmp/uploads/.gitkeep
 yarn.lock
 
 .env.local
