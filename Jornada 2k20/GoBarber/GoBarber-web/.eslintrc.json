@@ -65,7 +65,7 @@
                 }
             }
         ],
-        "@typescript-eslint/camelcase": "off"
+        "@typescript-eslint/camelcase": "never"
     },
     "settings": {
         "import/resolver": {

@@ -1,10 +1,12 @@
 import React, { useRef, useCallback } from "react";
 import { FiLock } from "react-icons/fi";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
+
+import api from "../../services/api";
 
 import { useToast } from "../../hooks/toast";
 import getValidationErrors from "../../utils/getValidationErros";
@@ -28,6 +30,9 @@ const ResetPassword: React.FC = () => {
 
     const history = useHistory();
 
+    const location = useLocation();
+    // console.log(location.search);
+
     const handleSubmit = useCallback(
         async (data: ResetPasswordFormData) => {
             try {
@@ -45,7 +50,27 @@ const ResetPassword: React.FC = () => {
                     abortEarly: false,
                 });
 
-                history.push("/signin");
+                const {password, password_confirmation} = data;
+                const token = location.search.replace("?token=", "");
+
+                if (!token) {
+                    addToast({
+                        type: "error",
+                        title: "Token inválido.",
+                        description:
+                            "Token inválido ou inexistente.",
+                    });
+
+                    return;
+                }
+
+                await api.post("/password/reset", {
+                    password,
+                    password_confirmation,
+                    token,
+                });
+
+                history.push("/");
             } catch (err) {
                 if (err instanceof Yup.ValidationError) {
                     const errors = getValidationErrors(err);
@@ -62,7 +87,7 @@ const ResetPassword: React.FC = () => {
                 });
             }
         },
-        [addToast, history],
+        [addToast, history, location.search],
     );
     return (
         <Container>
