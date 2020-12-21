@@ -1,4 +1,5 @@
 import { injectable, inject } from "tsyringe";
+import { classToClass } from "class-transformer";
 
 import Appointment from "../infra/typeorm/entities/Appointment";
 import IAppointmentRepository from "../repositories/IAppointmentRepository";
@@ -47,7 +48,10 @@ class ListProviderAppointmentsService {
 
             // console.log("Buscou do Redis.");
 
-            await this.cacheProvider.saveCache(cacheKey, appointments);
+            await this.cacheProvider.saveCache(
+                cacheKey,
+                classToClass(appointments),
+            );
         }
 
         return appointments;

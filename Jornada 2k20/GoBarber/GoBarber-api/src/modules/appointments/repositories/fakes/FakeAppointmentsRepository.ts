@@ -12,15 +12,24 @@ class AppointmentsRepository implements IAppointmentsRepository {
     // Variável em memória, assim não tem necessidade de criação de banco de dados.
     private appointments: Appointment[] = [];
 
-    public async findByDate(date: Date): Promise<Appointment | undefined> {
-        const findAppointment = this.appointments.find(appointment =>
-            isEqual(appointment.date, date),
+    public async findByDate(
+        date: Date,
+        provider_id: string,
+    ): Promise<Appointment | undefined> {
+        const findAppointment = this.appointments.find(
+            appointment =>
+                isEqual(appointment.date, date) &&
+                appointment.provider_id === provider_id,
         );
 
         return findAppointment;
     }
 
-    public async findAllInMonthFromProvider({ provider_id, month, year }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
+    public async findAllInMonthFromProvider({
+        provider_id,
+        month,
+        year,
+    }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
         const appointments = this.appointments.filter(appointment => {
             return (
                 appointment.provider_id === provider_id &&
@@ -32,7 +41,12 @@ class AppointmentsRepository implements IAppointmentsRepository {
         return appointments;
     }
 
-    public async findAllInDayFromProvider({ provider_id, day, month, year }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
+    public async findAllInDayFromProvider({
+        provider_id,
+        day,
+        month,
+        year,
+    }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
         const appointments = this.appointments.filter(appointment => {
             return (
                 appointment.provider_id === provider_id &&
