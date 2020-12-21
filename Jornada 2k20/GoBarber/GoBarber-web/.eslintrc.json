@@ -22,25 +22,12 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "react-hooks",
-        "@typescript-eslint",
-        "prettier"
-    ],
+    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
     "rules": {
         "no-console": "off",
-        "indent": [
-            "off"
-        ],
-        "react/jsx-indent": [
-            "warn",
-            4
-        ],
-        "react/jsx-indent-props": [
-            "error",
-            4
-        ],
+        "indent": ["off"],
+        "react/jsx-indent": ["warn", 4],
+        "react/jsx-indent-props": ["error", 4],
         "prettier/prettier": "error",
         "react/jsx-one-expression-per-line": "off",
         "react/jsx-props-no-spreading": "off",
@@ -51,9 +38,7 @@
         "react/jsx-filename-extension": [
             1,
             {
-                "extensions": [
-                    ".tsx"
-                ]
+                "extensions": [".tsx"]
             }
         ],
         "import/prefer-default-export": "off",
@@ -79,7 +64,8 @@
                     "Object": null
                 }
             }
-        ]
+        ],
+        "@typescript-eslint/camelcase": "off"
     },
     "settings": {
         "import/resolver": {
