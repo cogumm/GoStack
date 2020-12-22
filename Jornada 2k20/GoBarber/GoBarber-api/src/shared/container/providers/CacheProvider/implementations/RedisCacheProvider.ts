@@ -25,9 +25,9 @@ export default class RedisCacheProvider implements ICacheProvider {
         }
 
         // "Desconvertendo" o JSON.
-        const parsedDate = JSON.parse(data) as T;
+        const parsedData = JSON.parse(data) as T;
 
-        return parsedDate;
+        return parsedData;
     }
 
     public async invalidateCache(key: string): Promise<void> {

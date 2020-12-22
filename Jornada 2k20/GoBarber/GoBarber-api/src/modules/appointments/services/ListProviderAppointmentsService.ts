@@ -1,10 +1,9 @@
 import { injectable, inject } from "tsyringe";
 import { classToClass } from "class-transformer";
 
-import Appointment from "../infra/typeorm/entities/Appointment";
-import IAppointmentRepository from "../repositories/IAppointmentRepository";
-
 import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
+import Appointment from "../infra/typeorm/entities/Appointment";
+import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
 
 interface IRequest {
     provider_id: string;
@@ -17,7 +16,7 @@ interface IRequest {
 class ListProviderAppointmentsService {
     constructor(
         @inject("AppointmentsRepository")
-        private appointmentsRepository: IAppointmentRepository,
+        private appointmentsRepository: IAppointmentsRepository,
 
         @inject("CacheProvider")
         private cacheProvider: ICacheProvider,
@@ -25,16 +24,15 @@ class ListProviderAppointmentsService {
 
     public async execute({
         provider_id,
-        day,
-        month,
         year,
+        month,
+        day,
     }: IRequest): Promise<Appointment[]> {
         const cacheKey = `provider-appointments:${provider_id}:${year}-${month}-${day}`;
 
         let appointments = await this.cacheProvider.recoverCache<Appointment[]>(
             cacheKey,
         );
-        // console.log(cacheData);
 
         if (!appointments) {
             appointments = await this.appointmentsRepository.findAllInDayFromProvider(
@@ -45,8 +43,6 @@ class ListProviderAppointmentsService {
                     day,
                 },
             );
-
-            // console.log("Buscou do Redis.");
 
             await this.cacheProvider.saveCache(
                 cacheKey,

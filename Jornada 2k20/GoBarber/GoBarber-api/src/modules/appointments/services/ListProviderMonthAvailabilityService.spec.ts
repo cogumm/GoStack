@@ -1,97 +1,45 @@
-import FakeAppointmentsRepository from "../repositories/fakes/FakeAppointmentsRepository";
-import ListProviderMonthAvailabilityService from "./ListProviderMonthAvailabilityService";
+import FakeCacheProvider from "@shared/container/providers/CacheProvider/fakes/FakeCacheProvider";
+import FakeUsersRepository from "@modules/users/repositories/fakes/FakeUsersRepository";
+import ListProvidersService from "./ListProvidersService";
 
-let fakeAppointmentsRepository: FakeAppointmentsRepository;
-let listProviderMonthAvailability: ListProviderMonthAvailabilityService;
+let fakeUsersRepository: FakeUsersRepository;
+let fakeCacheProvider: FakeCacheProvider;
+let listProviders: ListProvidersService;
 
-describe("List Provider month availability", () => {
+describe("ListProviders", () => {
     beforeEach(() => {
-        fakeAppointmentsRepository = new FakeAppointmentsRepository();
-        listProviderMonthAvailability = new ListProviderMonthAvailabilityService(
-            fakeAppointmentsRepository,
+        fakeUsersRepository = new FakeUsersRepository();
+        fakeCacheProvider = new FakeCacheProvider();
+
+        listProviders = new ListProvidersService(
+            fakeUsersRepository,
+            fakeCacheProvider,
         );
     });
 
-    it("should be able to list the month availability from provider", async () => {
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 8, 0, 0),
+    it("should be able to list the providers", async () => {
+        const user1 = await fakeUsersRepository.create({
+            name: "John Doe",
+            email: "johndoe@example.com",
+            password: "123456",
         });
 
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 9, 0, 0),
+        const user2 = await fakeUsersRepository.create({
+            name: "John Trê",
+            email: "johntre@example.com",
+            password: "123456",
         });
 
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 10, 0, 0),
+        const loggedUser = await fakeUsersRepository.create({
+            name: "John Qua",
+            email: "johnqua@example.com",
+            password: "123456",
         });
 
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 11, 0, 0),
+        const providers = await listProviders.execute({
+            user_id: loggedUser.id,
         });
 
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 12, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 13, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 14, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 15, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 16, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 20, 17, 0, 0),
-        });
-
-        await fakeAppointmentsRepository.create({
-            provider_id: "user",
-            user_id: "user",
-            date: new Date(2020, 9, 21, 8, 0, 0),
-        });
-
-        const availability = await listProviderMonthAvailability.execute({
-            provider_id: "user",
-            year: 2020,
-            month: 10,
-        });
-
-        expect(availability).toEqual(
-            expect.arrayContaining([
-                { day: 19, available: true },
-                { day: 20, available: false },
-                { day: 21, available: true },
-                { day: 22, available: true },
-            ]),
-        );
+        expect(providers).toEqual([user1, user2]);
     });
 });

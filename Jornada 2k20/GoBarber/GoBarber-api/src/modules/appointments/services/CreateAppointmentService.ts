@@ -4,7 +4,7 @@ import { inject, injectable } from "tsyringe";
 import AppError from "@shared/errors/AppError";
 
 import Appointment from "../infra/typeorm/entities/Appointment";
-import IAppointmentRepository from "../repositories/IAppointmentRepository";
+import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
 import INotificationsRepository from "@modules/notifications/repositories/INotificationsRepository";
 import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
 
@@ -18,7 +18,7 @@ interface IRequest {
 class CreateAppointmentService {
     constructor(
         @inject("AppointmentsRepository")
-        private appointmentsRepository: IAppointmentRepository,
+        private appointmentsRepository: IAppointmentsRepository,
 
         @inject("NotificationsRepository")
         private notificationsRepository: INotificationsRepository,
