@@ -11,8 +11,6 @@ yarn.lock
 
 ormconfig.json
 
-README.md
-
 .docker/
 .dockerignore
 Dockerfile
