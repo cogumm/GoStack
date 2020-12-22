@@ -4,7 +4,7 @@ interface ICacheData {
     [key: string]: string;
 }
 
-export default class FakeCacheProviders implements ICacheProvider {
+export default class FakeCacheProvider implements ICacheProvider {
     private cache: ICacheData = {};
 
     public async saveCache(key: string, value: any): Promise<void> {
@@ -18,9 +18,9 @@ export default class FakeCacheProviders implements ICacheProvider {
             return null;
         }
 
-        const parsedDate = JSON.parse(data) as T;
+        const parsedData = JSON.parse(data) as T;
 
-        return parsedDate;
+        return parsedData;
     }
 
     public async invalidateCache(key: string): Promise<void> {
@@ -32,6 +32,8 @@ export default class FakeCacheProviders implements ICacheProvider {
             key.startsWith(`${prefix}:`),
         );
 
-        keys.forEach(key => delete this.cache[key]);
+        keys.forEach(key => {
+            delete this.cache[key];
+        });
     }
 }

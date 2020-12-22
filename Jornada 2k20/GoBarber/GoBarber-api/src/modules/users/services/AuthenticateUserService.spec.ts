@@ -22,23 +22,23 @@ describe("Authenticate User", () => {
     it("should be able to authenticate", async () => {
         const user = await fakeUsersRepository.create({
             name: "John Doe",
-            email: "john@doe.com",
+            email: "johndoe@example.com",
             password: "123456",
         });
 
         const response = await authenticateUser.execute({
-            email: "john@doe.com",
+            email: "johndoe@example.com",
             password: "123456",
         });
 
-        await expect(response).toHaveProperty("token");
-        await expect(response.user).toEqual(user);
+        expect(response).toHaveProperty("token");
+        expect(response.user).toEqual(user);
     });
 
     it("should not be able to authenticate with non existing user", async () => {
         await expect(
             authenticateUser.execute({
-                email: "john@doe.com",
+                email: "johndoe@example.com",
                 password: "123456",
             }),
         ).rejects.toBeInstanceOf(AppError);
@@ -47,13 +47,13 @@ describe("Authenticate User", () => {
     it("should not be able to authenticate with wrong password", async () => {
         await fakeUsersRepository.create({
             name: "John Doe",
-            email: "john@doe.com",
+            email: "johndoe@example.com",
             password: "123456",
         });
 
         await expect(
             authenticateUser.execute({
-                email: "john@doe.com",
+                email: "johndoe@example.com",
                 password: "wrong-password",
             }),
         ).rejects.toBeInstanceOf(AppError);
