@@ -2,8 +2,8 @@ import { injectable, inject } from "tsyringe";
 import path from "path";
 
 import AppError from "@shared/errors/AppError";
-import IUserRepository from "../repositories/IUsersRepository";
 import IMailProvider from "@shared/container/providers/MailProvider/models/IMailProvider";
+import IUsersRepository from "../repositories/IUsersRepository";
 import IUserTokensRepository from "../repositories/IUserTokensRepository";
 
 interface IRequest {
@@ -14,13 +14,13 @@ interface IRequest {
 class SendForgotPassEmailService {
     constructor(
         @inject("UsersRepository")
-        private usersRepository: IUserRepository,
-
-        @inject("MailProvider")
-        private mailProvider: IMailProvider,
+        private usersRepository: IUsersRepository,
 
         @inject("UserTokensRepository")
         private userTokensRepository: IUserTokensRepository,
+
+        @inject("MailProvider")
+        private mailProvider: IMailProvider,
     ) {}
 
     public async execute({ email }: IRequest): Promise<void> {

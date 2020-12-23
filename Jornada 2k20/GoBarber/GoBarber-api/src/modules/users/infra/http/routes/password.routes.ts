@@ -17,6 +17,7 @@ passRouter.post(
     }),
     forgotPassController.create,
 );
+
 passRouter.post(
     "/reset",
     celebrate({

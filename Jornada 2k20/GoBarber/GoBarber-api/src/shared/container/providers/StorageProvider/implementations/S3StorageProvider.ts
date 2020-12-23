@@ -10,7 +10,7 @@ class DiskStorageProvider implements IStorageProvider {
 
     constructor() {
         this.client = new aws.S3({
-            region: "us-east-1",
+            region: process.env.AWS_DEFAULT_REGION,
         });
     }
 
@@ -32,6 +32,7 @@ class DiskStorageProvider implements IStorageProvider {
                 ACL: "public-read",
                 Body: fileContent,
                 ContentType,
+                ContentDisposition: `inline; filename=${file}`,
             })
             .promise();
 

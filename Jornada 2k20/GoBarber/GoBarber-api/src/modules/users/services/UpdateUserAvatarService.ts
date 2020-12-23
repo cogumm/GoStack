@@ -26,7 +26,7 @@ class UpdateUserAvatarService {
 
         if (!user) {
             throw new AppError(
-                "Only authenticated users can change avatar.",
+                "Only authenticated users can change avatar",
                 401,
             );
         }

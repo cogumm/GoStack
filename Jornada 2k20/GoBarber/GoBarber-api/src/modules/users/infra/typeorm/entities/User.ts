@@ -5,10 +5,8 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
-
-import uploadConfig from "@config/upload";
-
 import { Exclude, Expose } from "class-transformer";
+import uploadConfig from "@config/upload";
 
 @Entity("users")
 class User {
@@ -37,9 +35,7 @@ class User {
     @Expose({ name: "avatar_url" })
     getAvatarUrl(): string | null {
         // Se o avatar não existir, já retorna null.
-        if (!this.avatar) {
-            return null;
-        }
+        if (!this.avatar) return null;
 
         switch (uploadConfig.driver) {
             case "disk":

@@ -8,7 +8,7 @@ import IFindAllInDayFromProviderDTO from "@modules/appointments/dtos/IFindAllInD
 
 import Appointment from "../../infra/typeorm/entities/Appointment";
 
-class AppointmentsRepository implements IAppointmentsRepository {
+class FakeAppointmentsRepository implements IAppointmentsRepository {
     // Variável em memória, assim não tem necessidade de criação de banco de dados.
     private appointments: Appointment[] = [];
 
@@ -30,31 +30,29 @@ class AppointmentsRepository implements IAppointmentsRepository {
         month,
         year,
     }: IFindAllInMonthFromProviderDTO): Promise<Appointment[]> {
-        const appointments = this.appointments.filter(appointment => {
-            return (
+        const appointments = this.appointments.filter(
+            appointment =>
                 appointment.provider_id === provider_id &&
                 getMonth(appointment.date) + 1 === month &&
-                getYear(appointment.date) === year
-            );
-        });
+                getYear(appointment.date) === year,
+        );
 
         return appointments;
     }
 
     public async findAllInDayFromProvider({
         provider_id,
-        day,
-        month,
         year,
+        month,
+        day,
     }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
-        const appointments = this.appointments.filter(appointment => {
-            return (
+        const appointments = this.appointments.filter(
+            appointment =>
                 appointment.provider_id === provider_id &&
                 getDate(appointment.date) === day &&
                 getMonth(appointment.date) + 1 === month &&
-                getYear(appointment.date) === year
-            );
-        });
+                getYear(appointment.date) === year,
+        );
 
         return appointments;
     }
@@ -74,4 +72,4 @@ class AppointmentsRepository implements IAppointmentsRepository {
     }
 }
 
-export default AppointmentsRepository;
+export default FakeAppointmentsRepository;

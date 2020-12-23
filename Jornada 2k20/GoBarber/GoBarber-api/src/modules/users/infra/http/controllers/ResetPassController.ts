@@ -11,7 +11,7 @@ export default class ResetPassController {
 
         await resetPass.execute({
             password,
-            token
+            token,
         });
 
         return res.status(204).json();

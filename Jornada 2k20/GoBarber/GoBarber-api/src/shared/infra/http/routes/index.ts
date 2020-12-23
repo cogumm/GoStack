@@ -21,6 +21,11 @@ routes.get("/", (req, res) => {
 });
 
 /**
+ * Rota de sessões.
+ */
+routes.use("/sessions", sessionsRouter);
+
+/**
  * Rota de agendamento.
  */
 routes.use("/appointments", appointmentsRouter);
@@ -34,11 +39,6 @@ routes.use("/providers", providersRouter);
  * Rota de usuários.
  */
 routes.use("/users", usersRouter);
-
-/**
- * Rota de sessões.
- */
-routes.use("/sessions", sessionsRouter);
 
 /**
  * Rota para resetar e esqueci senha

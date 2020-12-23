@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { classToClass } from "class-transformer";
 
 import ListProvidersService from "@modules/appointments/services/ListProvidersService";
 
-export default class ProviersController {
+export default class ProvidersController {
     public async index(req: Request, res: Response): Promise<Response> {
-        const { user_id } = req.body;
+        const user_id = req.user.id;
 
         const listProviders = container.resolve(ListProvidersService);
 
@@ -13,6 +14,6 @@ export default class ProviersController {
             user_id,
         });
 
-        return res.json(providers);
+        return res.json(classToClass(providers));
     }
 }

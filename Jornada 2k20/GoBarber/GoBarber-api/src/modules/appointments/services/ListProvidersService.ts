@@ -1,9 +1,11 @@
 import { injectable, inject } from "tsyringe";
 
-import User from "@modules/users/infra/typeorm/entities/User";
+import { classToClass } from "class-transformer";
 
-import IUserRepository from "@modules/users/repositories/IUsersRepository";
 import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
+import IUsersRepository from "@modules/users/repositories/IUsersRepository";
+
+import User from "@modules/users/infra/typeorm/entities/User";
 
 interface IRequest {
     user_id: string;
@@ -13,7 +15,7 @@ interface IRequest {
 class ListProvidersService {
     constructor(
         @inject("UsersRepository")
-        private usersRepository: IUserRepository,
+        private usersRepository: IUsersRepository,
 
         @inject("CacheProvider")
         private cacheProvider: ICacheProvider,
@@ -35,7 +37,7 @@ class ListProvidersService {
             // Salvando o cache para cada usuário da aplicação, sem o usuário logado.
             await this.cacheProvider.saveCache(
                 `providers-list:${user_id}`,
-                users,
+                classToClass(users),
             );
         }
 
