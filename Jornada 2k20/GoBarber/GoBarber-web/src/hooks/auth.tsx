@@ -2,9 +2,14 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
 import api from "../services/api";
 
+interface User {
+    id: string;
+    name: string;
+    avatar_url: string;
+}
 interface AuthState {
     token: string;
-    user: object;
+    user: User;
 }
 
 interface SignInCredentials {
@@ -13,8 +18,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    user: object;
+    user: User;
     singIn(credentials: SignInCredentials): Promise<void>;
     singOut(): void;
 }
