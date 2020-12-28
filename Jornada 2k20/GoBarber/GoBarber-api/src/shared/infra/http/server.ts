@@ -1,17 +1,17 @@
-import "dotenv/config";
 import "reflect-metadata";
-import "express-async-errors";
+import "dotenv/config";
 
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { errors } from "celebrate";
-import express, { Request, Response, NextFunction } from "express";
-
-import routes from "./routes";
-
-import rateLimiter from "./middlewares/rateLimiter";
+import "express-async-errors";
 
 import uploadConfig from "@config/upload";
 import AppError from "@shared/errors/AppError";
+
+import rateLimiter from "./middlewares/rateLimiter";
+
+import routes from "./routes";
 
 // Importando o database
 import "@shared/infra/typeorm";
@@ -19,11 +19,6 @@ import "@shared/infra/typeorm";
 import "@shared/container";
 
 const server = express();
-
-/**
- * Express rate limit.
- */
-server.use(rateLimiter);
 
 /**
  * Ativando o CORS da aplicação.
@@ -41,6 +36,11 @@ server.use(express.json());
 server.use("/files", express.static(uploadConfig.uploadsFolder));
 
 /**
+ * Express rate limit.
+ */
+server.use(rateLimiter);
+
+/**
  * Rotas da aplicação.
  */
 server.use(routes);
@@ -56,8 +56,8 @@ server.use(errors());
 server.use((err: Error, req: Request, res: Response, _: NextFunction) => {
     if (err instanceof AppError) {
         return res.status(err.statusCode).json({
-            message: err.message,
             status: "error",
+            message: err.message,
         });
     }
 

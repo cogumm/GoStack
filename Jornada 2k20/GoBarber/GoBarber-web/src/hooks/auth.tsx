@@ -2,9 +2,14 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
 import api from "../services/api";
 
+interface User {
+    id: string;
+    name: string;
+    avatar_url: string;
+}
 interface AuthState {
     token: string;
-    user: object;
+    user: User;
 }
 
 interface SignInCredentials {
@@ -13,8 +18,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    user: object;
+    user: User;
     singIn(credentials: SignInCredentials): Promise<void>;
     singOut(): void;
 }
@@ -27,6 +31,9 @@ export const AuthProvider: React.FC = ({ children }) => {
         const user = localStorage.getItem("@GoBarber:user");
 
         if (token && user) {
+            // Quando o usuário atualiza a página, mantém o token válido.
+            api.defaults.headers.authorization = `Bearer ${token}`;
+
             return { token, user: JSON.parse(user) };
         }
 
@@ -44,6 +51,9 @@ export const AuthProvider: React.FC = ({ children }) => {
 
         localStorage.setItem("@GoBarber:token", token);
         localStorage.setItem("@GoBarber:user", JSON.stringify(user));
+
+        // Definindo como padrão um cabeçalho de autorização.
+        api.defaults.headers.authorization = `Bearer ${token}`;
 
         setData({ token, user });
     }, []);

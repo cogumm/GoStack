@@ -149,9 +149,7 @@
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
 <a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -197,8 +195,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -245,15 +241,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { format, getHours, isBefore, startOfHour } from "date-fns";
-import { inject, injectable } from "tsyringe";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { startOfHour, isBefore, getHours, format } from "date-fns";
+import { injectable, inject } from "tsyringe";
 &nbsp;
 import AppError from "@shared/errors/AppError";
 &nbsp;
+import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
+import INotificationsRepository from "@modules/notifications/repositories/INotificationsRepository";
 import Appointment from "../infra/typeorm/entities/Appointment";
 import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
-import INotificationsRepository from "@modules/notifications/repositories/INotificationsRepository";
-import ICacheProvider from "@shared/container/providers/CacheProvider/models/ICacheProvider";
 &nbsp;
 interface IRequest {
     provider_id: string;
@@ -284,31 +280,29 @@ class CreateAppointmentService {
         // Verificando para não poder agendar em um horário que já passou
         if (isBefore(appointmentDate, Date.now())) {
             throw new AppError(
-                "You can't create an appointment on a past date.",
+                "You can't create an appointment on a past date",
             );
         }
 &nbsp;
         // Servidor não pode agendar um horário apra ele mesmo
         if (user_id === provider_id) {
-            throw new AppError(
-                "You can't create an appointment with yourself.",
-            );
+            throw new AppError("You can't create an appointment with yourself");
         }
 &nbsp;
         // Verificando se está dentro do horário de funcionamento
         if (getHours(appointmentDate) &lt; 8 || getHours(appointmentDate) &gt; 17) {
             throw new AppError(
-                "Yout can only create appointments between 8am and 5pm.",
+                "You can only create appointments between 8am and 5pm",
             );
         }
 &nbsp;
-        const findAppointmentsInSameDate = await this.appointmentsRepository.findByDate(
+        const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
             appointmentDate,
             provider_id,
         );
 &nbsp;
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (findAppointmentsInSameDate) {
-<span class="cstat-no" title="statement not covered" >            throw new AppError("This appointments is already booked.");</span>
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (findAppointmentInSameDate) {
+<span class="cstat-no" title="statement not covered" >            throw new AppError("This appointment is already booked");</span>
         }
 &nbsp;
         const appointment = await this.appointmentsRepository.create({
@@ -318,12 +312,12 @@ class CreateAppointmentService {
         });
 &nbsp;
         // Formatando a data.
-        const dateFormat = format(appointmentDate, "dd/MM/yyyy 'at' HH:mm");
+        const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'at' HH:mm");
 &nbsp;
         // Enviando a notificação para o servidor.
         await this.notificationsRepository.create({
             recipient_id: provider_id,
-            content: `New schedule for the day ${dateFormat}h`,
+            content: `New schedule for the day ${dateFormatted}h`,
         });
 &nbsp;
         // Invalidando o cache quando for criando um novo agendamento.
@@ -346,7 +340,7 @@ export default CreateAppointmentService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 22 2020 14:16:02 GMT-0300 (Horário Padrão de Brasília)
+                at Tue Dec 22 2020 21:28:16 GMT-0300 (Horário Padrão de Brasília)
             </div>
         </div>
         <script src="../../prettify.js"></script>

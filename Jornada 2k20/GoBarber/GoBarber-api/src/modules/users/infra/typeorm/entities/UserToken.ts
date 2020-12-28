@@ -4,11 +4,11 @@ import {
     PrimaryGeneratedColumn,
     CreateDateColumn,
     UpdateDateColumn,
-    Generated
+    Generated,
 } from "typeorm";
 
 @Entity("user_tokens")
-class UserToken {
+export default class UserToken {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -25,5 +25,3 @@ class UserToken {
     @UpdateDateColumn()
     updated_at: Date;
 }
-
-export default UserToken;

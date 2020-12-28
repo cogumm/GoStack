@@ -116,9 +116,13 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -150,38 +154,43 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { sign } from "jsonwebtoken";
-import { injectable, inject } from "tsyringe";
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { injectable, inject } from "tsyringe";
+import { sign } from "jsonwebtoken";
 import authConfig from "@config/auth";
 &nbsp;
 import AppError from "@shared/errors/AppError";
-import IUserRepository from "../repositories/IUsersRepository";
+import IUsersRepository from "../repositories/IUsersRepository";
 import IHashProvider from "../providers/HashProvider/models/IHashProvider";
 &nbsp;
 import User from "../infra/typeorm/entities/User";
@@ -200,26 +209,32 @@ interface IResponse {
 class AuthenticateUserService {
     constructor(
         @inject("UsersRepository")
-        private usersRepository: IUserRepository,
+        private usersRepository: IUsersRepository,
 &nbsp;
         @inject("HashProvider")
         private hashProvider: IHashProvider,
-    ) { }
+    ) {}
 &nbsp;
     public async execute({ email, password }: IRequest): Promise&lt;IResponse&gt; {
         // Validar o e-mail se é um e-mail válido.
         const user = await this.usersRepository.findByEmail(email);
+&nbsp;
         if (!user) {
-            throw new AppError("Incorrect email/password combination.", 401);
+            throw new AppError("Incorrect email/password combination", 401);
         }
 &nbsp;
         // Validando a senha com o usuário.
-        const passwordMatched = await this.hashProvider.compareHash(password, user.password);
+        const passwordMatched = await this.hashProvider.compareHash(
+            password,
+            user.password,
+        );
+&nbsp;
         if (!passwordMatched) {
-            throw new AppError("Incorrect email/password combination.", 401);
+            throw new AppError("Incorrect email/password combination", 401);
         }
 &nbsp;
         const { secret, expiresIn } = authConfig.jwt;
+&nbsp;
         const token = sign({}, secret, {
             subject: user.id,
             expiresIn,
@@ -241,7 +256,7 @@ export default AuthenticateUserService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Dec 22 2020 14:16:02 GMT-0300 (Horário Padrão de Brasília)
+                at Tue Dec 22 2020 21:28:16 GMT-0300 (Horário Padrão de Brasília)
             </div>
         </div>
         <script src="../../prettify.js"></script>

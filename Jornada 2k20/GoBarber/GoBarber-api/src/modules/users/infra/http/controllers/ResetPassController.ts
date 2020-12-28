@@ -10,8 +10,8 @@ export default class ResetPassController {
         const resetPass = container.resolve(ResetPassService);
 
         await resetPass.execute({
+            token,
             password,
-            token
         });
 
         return res.status(204).json();

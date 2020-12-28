@@ -1,8 +1,7 @@
-import { container } from "tsyringe";
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { classToClass } from "class-transformer";
 
-// Importando o services.
 import ListProviderAppointmentsService from "@modules/appointments/services/ListProviderAppointmentsService";
 
 export default class ProviderAppointmentsController {

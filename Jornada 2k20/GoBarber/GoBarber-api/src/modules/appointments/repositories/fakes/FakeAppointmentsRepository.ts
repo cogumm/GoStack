@@ -1,5 +1,5 @@
 import { uuid } from "uuidv4";
-import { getYear, getMonth, getDate, isEqual } from "date-fns";
+import { isEqual, getMonth, getYear, getDate } from "date-fns";
 
 import IAppointmentsRepository from "@modules/appointments/repositories/IAppointmentsRepository";
 import ICreateAppointmentDTO from "@modules/appointments/dtos/ICreateAppointmentDTO";
@@ -8,7 +8,7 @@ import IFindAllInDayFromProviderDTO from "@modules/appointments/dtos/IFindAllInD
 
 import Appointment from "../../infra/typeorm/entities/Appointment";
 
-class AppointmentsRepository implements IAppointmentsRepository {
+export default class AppointmentsRepository implements IAppointmentsRepository {
     // Variável em memória, assim não tem necessidade de criação de banco de dados.
     private appointments: Appointment[] = [];
 
@@ -73,5 +73,3 @@ class AppointmentsRepository implements IAppointmentsRepository {
         return appointment;
     }
 }
-
-export default AppointmentsRepository;

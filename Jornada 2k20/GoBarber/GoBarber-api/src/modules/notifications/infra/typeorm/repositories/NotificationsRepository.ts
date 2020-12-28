@@ -5,7 +5,8 @@ import ICreateNotificationDTO from "@modules/notifications/dtos/ICreateNotificat
 
 import Notification from "../schemas/Notification";
 
-class NotificationsRepository implements INotificationsRepository {
+export default class NotificationsRepository
+    implements INotificationsRepository {
     private ormRepository: MongoRepository<Notification>;
 
     constructor() {
@@ -26,5 +27,3 @@ class NotificationsRepository implements INotificationsRepository {
         return notification;
     }
 }
-
-export default NotificationsRepository;

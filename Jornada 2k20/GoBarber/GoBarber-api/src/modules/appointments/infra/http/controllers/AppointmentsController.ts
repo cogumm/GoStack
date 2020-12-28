@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 // Importando o services.
 import CreateAppointmentService from "@modules/appointments/services/CreateAppointmentService";
 
-export default class AppointmentsController {
+export default class AppointmentController {
     public async create(req: Request, res: Response): Promise<Response> {
         const user_id = req.user.id;
         const { provider_id, date } = req.body;
@@ -15,9 +15,9 @@ export default class AppointmentsController {
         const createAppointment = container.resolve(CreateAppointmentService);
 
         const appointment = await createAppointment.execute({
+            date,
             provider_id,
             user_id,
-            date,
         });
 
         return res.json(appointment);

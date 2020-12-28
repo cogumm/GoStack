@@ -4,7 +4,7 @@ import IUserTokensRepository from "@modules/users/repositories/IUserTokensReposi
 
 import UserToken from "../../infra/typeorm/entities/UserToken";
 
-class FakeUserTokensRepository implements IUserTokensRepository {
+export default class FakeUserTokensRepository implements IUserTokensRepository {
     private userTokens: UserToken[] = [];
 
     public async generate(user_id: string): Promise<UserToken> {
@@ -31,5 +31,3 @@ class FakeUserTokensRepository implements IUserTokensRepository {
         return userToken;
     }
 }
-
-export default FakeUserTokensRepository;

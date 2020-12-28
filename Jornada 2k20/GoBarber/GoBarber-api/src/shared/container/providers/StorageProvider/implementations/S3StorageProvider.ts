@@ -5,12 +5,12 @@ import aws, { S3 } from "aws-sdk";
 import uploadConfig from "@config/upload";
 import IStorageProvider from "../models/IStorageProvider";
 
-class DiskStorageProvider implements IStorageProvider {
+export default class DiskStorageProvider implements IStorageProvider {
     private client: S3;
 
     constructor() {
         this.client = new aws.S3({
-            region: "us-east-1",
+            region: process.env.AWS_DEFAULT_REGION,
         });
     }
 
@@ -32,6 +32,7 @@ class DiskStorageProvider implements IStorageProvider {
                 ACL: "public-read",
                 Body: fileContent,
                 ContentType,
+                ContentDisposition: `inline; filename=${file}`,
             })
             .promise();
 
@@ -50,5 +51,3 @@ class DiskStorageProvider implements IStorageProvider {
             .promise();
     }
 }
-
-export default DiskStorageProvider;
