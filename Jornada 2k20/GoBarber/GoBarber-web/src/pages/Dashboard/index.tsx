@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { isToday, format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -9,12 +11,31 @@ import logoImg from "../../assets/logo.svg";
 import { useAuth } from "../../hooks/auth";
 import api from "../../services/api";
 
+import {
+    Container,
+    Header,
+    HeaderContent,
+    Profile,
+    Content,
+    Schedule,
+    NextAppointment,
+    Section,
+    Appointment,
+    Calendar,
+  } from './styles';
 interface MonthAvailabilityItem {
     day: number;
     available: boolean;
 }
 
-import { Container, Header, HeaderContent, Profile, Content, Schedule, NextAppointment, Section, Appointment, Calendar } from './styles';
+interface Appointment {
+    id: string;
+    date: string;
+    user: {
+        name: string;
+        avatar_url: string;
+    };
+}
 
 const Dashboard: React.FC = () => {
     // Quando clicar no dia do calendário alterar a listagem dos agendamentos.
@@ -22,6 +43,8 @@ const Dashboard: React.FC = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
 
     const [monthAvailability, setMonthAvailability] = useState<MonthAvailabilityItem[]>([]);
+
+    const [appointment, setAppointment] = useState<Appointment[]>([]);
 
     const { singOut, user } = useAuth();
     // console.log(user);
@@ -49,6 +72,20 @@ const Dashboard: React.FC = () => {
         });
     }, [currentMonth, user.id]);
 
+    // Carregando os agendamentos vindo da API.
+    useEffect(() => {
+        api.get("/appointments/me", {
+            params: {
+                year: currentMonth.getFullYear(),
+                month: currentMonth.getMonth() + 1,
+                day: selectedDate.getDate(),
+            }
+        }).then(res => {
+            setAppointment(res.data);
+            console.log(res.data);
+        })
+    }, [selectedDate]);
+
     // Desabilitando os dias que estão com agendamentos lotados ou dias que já passaram.
     /**
      * useMemo: Serve para memorizar um valor expecífico, uma formatação, qualquer coisa,
@@ -67,6 +104,18 @@ const Dashboard: React.FC = () => {
 
             return dates;
     }, [currentMonth, monthAvailability]);
+
+    const selectedDateAsText = useMemo(() => {
+        return format(selectedDate, "'dia' dd 'de' MMMM", {
+            locale: ptBR,
+        });
+    }, [selectedDate]);
+
+    const selectedWeekDay = useMemo(() => {
+        return format(selectedDate, "cccc", {
+            locale: ptBR,
+        });
+    }, [selectedDate])
 
     return (
         <Container>
@@ -93,9 +142,9 @@ const Dashboard: React.FC = () => {
                 <Schedule>
                     <h1>Horários agendados</h1>
                     <p>
-                        <span>Hoje</span>
-                        <span>dia 28</span>
-                        <span>segunda-feira</span>
+                        {isToday(selectedDate) && <span>Hoje</span> }
+                        <span>{selectedWeekDay}</span>
+                        <span>{selectedDateAsText}</span>
                     </p>
 
                     <NextAppointment>
