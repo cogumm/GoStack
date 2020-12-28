@@ -12,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-class ResetPassService {
+export default class ResetPasswordService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -41,7 +41,7 @@ class ResetPassService {
         const compareDate = addHours(tokenCreatedAt, 2);
 
         if (isAfter(Date.now(), compareDate)) {
-            throw new AppError("Token expired");
+            throw new AppError("Token expired.");
         }
 
         user.password = await this.hashProvider.generateHash(password);
@@ -49,5 +49,3 @@ class ResetPassService {
         await this.usersRepository.save(user);
     }
 }
-
-export default ResetPassService;

@@ -11,16 +11,16 @@ interface IRequest {
 }
 
 @injectable()
-class SendForgotPassEmailService {
+export default class SendForgotPasswordEmailService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
 
-        @inject("UserTokensRepository")
-        private userTokensRepository: IUserTokensRepository,
-
         @inject("MailProvider")
         private mailProvider: IMailProvider,
+
+        @inject("UserTokensRepository")
+        private userTokensRepository: IUserTokensRepository,
     ) {}
 
     public async execute({ email }: IRequest): Promise<void> {
@@ -56,5 +56,3 @@ class SendForgotPassEmailService {
         });
     }
 }
-
-export default SendForgotPassEmailService;

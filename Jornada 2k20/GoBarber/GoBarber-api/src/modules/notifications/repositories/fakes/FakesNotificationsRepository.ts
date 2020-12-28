@@ -5,7 +5,8 @@ import ICreateNotificationDTO from "@modules/notifications/dtos/ICreateNotificat
 
 import Notification from "../../infra/typeorm/schemas/Notification";
 
-class FakeNotificationsRepository implements INotificationsRepository {
+export default class NotificationsRepository
+    implements INotificationsRepository {
     private notifications: Notification[] = [];
 
     public async create({
@@ -25,5 +26,3 @@ class FakeNotificationsRepository implements INotificationsRepository {
         return notification;
     }
 }
-
-export default FakeNotificationsRepository;

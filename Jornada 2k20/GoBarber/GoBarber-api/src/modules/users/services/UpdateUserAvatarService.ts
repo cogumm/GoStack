@@ -12,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateUserAvatarService {
+export default class UpdateUserAvatarService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -26,7 +26,7 @@ class UpdateUserAvatarService {
 
         if (!user) {
             throw new AppError(
-                "Only authenticated users can change avatar",
+                "Only authenticated users can change avatar.",
                 401,
             );
         }
@@ -46,5 +46,3 @@ class UpdateUserAvatarService {
         return user;
     }
 }
-
-export default UpdateUserAvatarService;

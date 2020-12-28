@@ -5,9 +5,9 @@ import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
 
 interface IRequest {
     provider_id: string;
-    year: number;
-    month: number;
     day: number;
+    month: number;
+    year: number;
 }
 
 type IResponse = Array<{
@@ -16,7 +16,7 @@ type IResponse = Array<{
 }>;
 
 @injectable()
-class ListProviderDayAvailabilityService {
+export default class ListProviderDayAvailabilityService {
     constructor(
         @inject("AppointmentsRepository")
         private appointmentsRepository: IAppointmentsRepository,
@@ -63,5 +63,3 @@ class ListProviderDayAvailabilityService {
         return availability;
     }
 }
-
-export default ListProviderDayAvailabilityService;

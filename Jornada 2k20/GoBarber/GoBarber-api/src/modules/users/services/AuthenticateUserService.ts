@@ -1,6 +1,6 @@
-import { injectable, inject } from "tsyringe";
 import { sign } from "jsonwebtoken";
 import authConfig from "@config/auth";
+import { injectable, inject } from "tsyringe";
 
 import AppError from "@shared/errors/AppError";
 import IUsersRepository from "../repositories/IUsersRepository";
@@ -19,7 +19,7 @@ interface IResponse {
 }
 
 @injectable()
-class AuthenticateUserService {
+export default class AuthenticateUserService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -33,7 +33,7 @@ class AuthenticateUserService {
         const user = await this.usersRepository.findByEmail(email);
 
         if (!user) {
-            throw new AppError("Incorrect email/password combination", 401);
+            throw new AppError("Incorrect email/password combination.", 401);
         }
 
         // Validando a senha com o usuário.
@@ -43,7 +43,7 @@ class AuthenticateUserService {
         );
 
         if (!passwordMatched) {
-            throw new AppError("Incorrect email/password combination", 401);
+            throw new AppError("Incorrect email/password combination.", 401);
         }
 
         const { secret, expiresIn } = authConfig.jwt;
@@ -60,5 +60,3 @@ class AuthenticateUserService {
         };
     }
 }
-
-export default AuthenticateUserService;

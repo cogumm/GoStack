@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class ShowProfileService {
+export default class ShowProfileService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -20,11 +20,9 @@ class ShowProfileService {
         const user = await this.usersRepository.findById(user_id);
 
         if (!user) {
-            throw new AppError("User not found");
+            throw new AppError("User not found.");
         }
 
         return user;
     }
 }
-
-export default ShowProfileService;

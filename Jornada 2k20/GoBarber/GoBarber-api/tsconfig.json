@@ -7,12 +7,12 @@
         "strict": true,
         "strictPropertyInitialization": false,
         "baseUrl": "./src",
+        "allowJs": true,
         "paths": {
             "@modules/*": ["modules/*"],
             "@config/*": ["config/*"],
             "@shared/*": ["shared/*"]
         },
-        "allowJs": true,
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,

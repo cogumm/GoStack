@@ -14,7 +14,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateUserService {
+export default class CreateUserService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -31,7 +31,7 @@ class CreateUserService {
         const checkUserExists = await this.usersRepository.findByEmail(email);
 
         if (checkUserExists) {
-            throw new AppError("Email address already used");
+            throw new AppError("Email address already used.");
         }
 
         // Criptografando a senha.
@@ -50,5 +50,3 @@ class CreateUserService {
         return user;
     }
 }
-
-export default CreateUserService;

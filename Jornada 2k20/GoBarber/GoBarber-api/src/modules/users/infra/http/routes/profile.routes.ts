@@ -3,7 +3,6 @@ import { celebrate, Segments, Joi } from "celebrate";
 
 import ProfileController from "../controllers/ProfileController";
 
-// Certificando se o usuário está autenticado.
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const profileRouter = Router();

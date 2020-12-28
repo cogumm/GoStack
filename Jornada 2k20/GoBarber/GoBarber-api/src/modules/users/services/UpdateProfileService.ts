@@ -15,7 +15,7 @@ interface IRequest {
 }
 
 @injectable()
-class UpdateProfileService {
+export default class UpdateProfileService {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -28,13 +28,13 @@ class UpdateProfileService {
         user_id,
         name,
         email,
-        password,
         old_password,
+        password,
     }: IRequest): Promise<User> {
         const user = await this.usersRepository.findById(user_id);
 
         if (!user) {
-            throw new AppError("User not found");
+            throw new AppError("User not found.");
         }
 
         // Verificando se o e-mail informado não está sendo utilizado por outro usuário
@@ -43,7 +43,7 @@ class UpdateProfileService {
         );
 
         if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
-            throw new AppError("E-mail already in use");
+            throw new AppError("E-mail already in use.");
         }
 
         user.name = name;
@@ -52,20 +52,19 @@ class UpdateProfileService {
         // Verificando se a senha "antiga" existe
         if (password && !old_password) {
             throw new AppError(
-                "You need to inform the old password to set a new password",
+                "You need to inform the old password to set a new password.",
             );
         }
 
         // Atualizando a senha
         if (password && old_password) {
-            // Comparando a senha antiga com a senha informada
             const checkOldPassword = await this.hashProvider.compareHash(
                 old_password,
                 user.password,
             );
 
             if (!checkOldPassword) {
-                throw new AppError("Old password does not match");
+                throw new AppError("Old password does not match.");
             }
 
             user.password = await this.hashProvider.generateHash(password);
@@ -74,5 +73,3 @@ class UpdateProfileService {
         return this.usersRepository.save(user);
     }
 }
-
-export default UpdateProfileService;

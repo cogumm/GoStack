@@ -5,11 +5,12 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
 } from "typeorm";
-import { Exclude, Expose } from "class-transformer";
 import uploadConfig from "@config/upload";
 
+import { Exclude, Expose } from "class-transformer";
+
 @Entity("users")
-class User {
+export default class User {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -35,7 +36,9 @@ class User {
     @Expose({ name: "avatar_url" })
     getAvatarUrl(): string | null {
         // Se o avatar não existir, já retorna null.
-        if (!this.avatar) return null;
+        if (!this.avatar) {
+            return null;
+        }
 
         switch (uploadConfig.driver) {
             case "disk":
@@ -47,5 +50,3 @@ class User {
         }
     }
 }
-
-export default User;

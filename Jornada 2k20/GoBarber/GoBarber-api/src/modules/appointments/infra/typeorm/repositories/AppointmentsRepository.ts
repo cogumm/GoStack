@@ -1,4 +1,4 @@
-import { getRepository, Raw, Repository } from "typeorm";
+import { getRepository, Repository, Raw } from "typeorm";
 
 import IAppointmentsRepository from "@modules/appointments/repositories/IAppointmentsRepository";
 import ICreateAppointmentDTO from "@modules/appointments/dtos/ICreateAppointmentDTO";
@@ -7,7 +7,7 @@ import IFindAllInDayFromProviderDTO from "@modules/appointments/dtos/IFindAllInD
 
 import Appointment from "../entities/Appointment";
 
-class AppointmentsRepository implements IAppointmentsRepository {
+export default class AppointmentsRepository implements IAppointmentsRepository {
     private ormRepository: Repository<Appointment>;
 
     constructor() {
@@ -43,14 +43,15 @@ class AppointmentsRepository implements IAppointmentsRepository {
                 ),
             },
         });
+
         return appointments;
     }
 
     public async findAllInDayFromProvider({
         provider_id,
-        year,
-        month,
         day,
+        month,
+        year,
     }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
         const parsedDay = String(day).padStart(2, "0");
         const parsedMonth = String(month).padStart(2, "0");
@@ -65,6 +66,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
             },
             relations: ["user"],
         });
+
         return appointments;
     }
 
@@ -84,5 +86,3 @@ class AppointmentsRepository implements IAppointmentsRepository {
         return appointment;
     }
 }
-
-export default AppointmentsRepository;
