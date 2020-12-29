@@ -21,6 +21,8 @@ interface ProfileFormData {
     name: string;
     email: string;
     password: string;
+    old_password: string;
+    password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
@@ -42,23 +44,60 @@ const Profile: React.FC = () => {
                     email: Yup.string()
                         .required("E-mail obrigatório.")
                         .email("Digite um e-mail válido."),
-                    password: Yup.string().min(6, "No mínimo 6 digitos."),
+                    password: Yup.string().when("old_password", {
+                        is: val => !!val.length,
+                        then: Yup.string().required("Campo obrigatório."),
+                        otherwise: Yup.string(),
+                    }),
+                    old_password: Yup.string(),
+                    password_confirmation: Yup.string()
+                        .when("old_password", {
+                            is: val => !!val.length,
+                            then: Yup.string().required("Campo obrigatório."),
+                            otherwise: Yup.string(),
+                        }).oneOf(
+                            [Yup.ref("password")],
+                            "Senhas não são parecidas.",
+                        ),
                 });
 
                 await schema.validate(data, {
                     abortEarly: false,
                 });
 
-                await api.post("/users", data);
+                const {
+                    name,
+                    email,
+                    old_password,
+                    password,
+                    password_confirmation,
+                } = data;
+
+                const formData = {
+                    name,
+                    email,
+                    // Se o campo old_password estiver preenchido, ele envia os campos se não envia vazio.
+                    ...(old_password
+                      ? {
+                          old_password,
+                          password,
+                          password_confirmation,
+                        }
+                    : {}),
+                };
+
+
+                const res = await api.put("/profile", formData);
+                updateUser(res.data);
 
                 // Se cadastrou com sucesso.
-                history.push("/");
+                history.push("/dashboard");
 
                 addToast({
                     type: "success",
-                    title: "Cadastro realizado.",
+                    title: "Perfil atualizado.",
                     description:
-                        "Você já pode realizar o seu logon no GoBarber!",
+                        "Perfil atualizado com sucesso.",
                 });
             } catch (err) {
                 if (err instanceof Yup.ValidationError) {
@@ -71,9 +110,9 @@ const Profile: React.FC = () => {
                 // Toast
                 addToast({
                     type: "error",
-                    title: "Erro no cadastro.",
+                    title: "Erro na atualização.",
                     description:
-                        "Ocorreu um erro ao realizar o cadastro, tente novamente.",
+                        "Ocorreu um erro ao atluzar o seu perfil, tente novamente.",
                 });
             }
         },
