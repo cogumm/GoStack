@@ -56,8 +56,9 @@
         "jest": "^26.2.2",
         "prettier": "^2.0.5",
         "ts-jest": "^26.1.4",
-        "ts-node-dev": "^1.0.0-pre.44",
+        "ts-node": "^9.1.1",
+        "ts-node-dev": "^1.1.1",
         "tsconfig-paths": "^3.9.0",
-        "typescript": "^3.9.5"
+        "typescript": "^4.1.3"
     }
 }
