@@ -12,7 +12,6 @@
         "@babel/core": "^7.10.2",
         "@babel/preset-env": "^7.10.2",
         "@babel/preset-react": "^7.10.1",
-        "axios": "^0.19.2",
         "babel-loader": "^8.1.0",
         "css-loader": "^3.5.3",
         "file-loader": "^6.0.0",
@@ -24,6 +23,7 @@
     },
     "devDependencies": {
         "@babel/plugin-transform-runtime": "^7.10.1",
+        "axios": ">=0.21.1",
         "webpack-dev-server": "^3.11.0"
     }
 }

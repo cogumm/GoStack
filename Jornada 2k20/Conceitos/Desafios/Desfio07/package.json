@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.2",
     "filesize": "^6.1.0",
     "history": "^4.10.1",
     "polished": "^3.5.2",
@@ -46,6 +45,7 @@
     "@types/styled-components": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.28.0",
     "@typescript-eslint/parser": "^2.28.0",
+    "axios": ">=0.21.1",
     "axios-mock-adapter": "^1.18.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
