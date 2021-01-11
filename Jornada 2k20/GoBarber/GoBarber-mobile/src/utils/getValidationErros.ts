@@ -3,12 +3,13 @@ import { ValidationError } from 'yup';
 interface Errors {
   [key: string]: string;
 }
-export default function getValidationErros(err: ValidationError): Errors {
-  const validationsErrors: Errors = {};
+
+export default function getValidationErrors(err: ValidationError): Errors {
+  const validationErrors: Errors = {};
 
   err.inner.forEach(error => {
-    validationsErrors[error.path] = error.message;
+    validationErrors[error.path] = error.message;
   });
 
-  return validationsErrors;
+  return validationErrors;
 }
