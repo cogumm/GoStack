@@ -1,10 +1,10 @@
 import React, {
   useState,
+  useCallback,
   useEffect,
   useRef,
   useImperativeHandle,
   forwardRef,
-  useCallback,
 } from 'react';
 
 import { TextInputProps } from 'react-native';
@@ -31,7 +31,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
 ) => {
   const inputElementRef = useRef<any>(null);
 
-  const { registerField, defaultValue = '', fieldName, error } = useField(name);
+  const { registerField, fieldName, defaultValue = '', error } = useField(name);
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 
   const [isFocused, setIsFocused] = useState(false);
@@ -52,14 +52,14 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
    */
   useImperativeHandle(ref, () => ({
     focus() {
-      inputElementRef.current.focus();
+      inputElementRef.current?.focus();
     },
   }));
 
   useEffect(() => {
     registerField<string>({
       name: fieldName,
-      ref: inputValueRef,
+      ref: inputValueRef.current,
       path: 'value',
       setValue(ref: any, value) {
         inputValueRef.current.value = value;
@@ -76,7 +76,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         inputElementRef.current.clear();
       },
     });
-  }, [fieldName, registerField]);
+  }, [registerField, fieldName]);
 
   return (
     <Container isFocused={isFocused} isErrored={!!error}>
@@ -85,6 +85,7 @@ const Input: React.ForwardRefRenderFunction<InputRef, InputProps> = (
         size={20}
         color={isFocused || isFilled ? '#ff9000' : '#666360'}
       />
+
       <TextInput
         ref={inputElementRef}
         // Teclado em modo dark no iOS, se não for iOS o teclado vem padrão.
