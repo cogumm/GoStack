@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import SingIn from '../pages/SignIn';
+import SignIn from '../pages/SignIn';
 import SingUp from '../pages/SingUp';
 
 // Navegação para autenticação.
@@ -14,7 +14,7 @@ const AuthRoutes: React.FC = () => (
             cardStyle: { backgroundColor: '#312e38' },
         }}
     >
-        <Auth.Screen name="SingIn" component={SingIn} />
+        <Auth.Screen name="SingIn" component={SignIn} />
         <Auth.Screen name="SingUp" component={SingUp} />
     </Auth.Navigator>
 );
