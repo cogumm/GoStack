@@ -31,6 +31,7 @@
         "custom": "ignore"
       }
     ],
+    "camelcase": "off",
     "react/jsx-indent": ["warn", 2],
     "react/jsx-indent-props": ["error", 2],
     "react/prop-types": "off",
