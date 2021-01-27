@@ -27,6 +27,8 @@ export const Header = styled.View`
   align-items: center;
 `;
 
+export const Content = styled.ScrollView``;
+
 export const BackButton = styled.TouchableOpacity``;
 
 export const HeaderTitle = styled.Text`
@@ -95,4 +97,39 @@ export const OpenDatePickerButtonText = styled.Text`
   font-family: 'RobotoSlab-Medium';
   font-size: 16px;
   color: #232129;
+`;
+
+export const Schedule = styled.View`
+  padding: 24px 0 16px;
+`;
+
+export const Section = styled.View`
+  margin-bottom: 24px;
+`;
+
+export const SectionTitle = styled.Text`
+  font-family: 'RobotoSlab-Regular';
+  font-size: 18px;
+  color: #999591;
+  margin: 0 24px 12px;
+`;
+
+export const SectionContent = styled.ScrollView.attrs({
+  contentContainerStyle: { paddingHorizontal: 24 },
+  horizontal: true,
+  // Não mostrar qualquer tipo de indicador de scroll.
+  showsHorizontalScrollIndicator: false,
+})``;
+
+export const Hour = styled.View`
+  padding: 12px;
+  background: #3e3b47;
+  border-radius: 10px;
+  margin-right: 8px;
+`;
+
+export const HourText = styled.Text`
+  font-family: 'RobotoSlab-Regular';
+  font-size: 16px;
+  color: #f4ede8;
 `;
