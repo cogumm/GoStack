@@ -20,8 +20,8 @@ interface SignInCredentials {
 
 interface AuthContextData {
     user: User;
-    singIn(credentials: SignInCredentials): Promise<void>;
-    singOut(): void;
+    signIn(credentials: SignInCredentials): Promise<void>;
+    signOut(): void;
     updateUser(user: User): void;
 }
 
@@ -42,8 +42,8 @@ export const AuthProvider: React.FC = ({ children }) => {
         return {} as AuthState;
     });
 
-    const singIn = useCallback(async ({ email, password }) => {
-        // console.log("singIn");
+    const signIn = useCallback(async ({ email, password }) => {
+        // console.log("signIn");
         const response = await api.post("/sessions", {
             email,
             password,
@@ -60,24 +60,29 @@ export const AuthProvider: React.FC = ({ children }) => {
         setData({ token, user });
     }, []);
 
-    const singOut = useCallback(() => {
+    const signOut = useCallback(() => {
         localStorage.removeItem("@GoBarber:token");
         localStorage.removeItem("@GoBarber:user");
 
         setData({} as AuthState);
     }, []);
 
-    const updateUser = useCallback((user: User) => {
-        localStorage.setItem("@GoBarber:user", JSON.stringify(user));
+    const updateUser = useCallback(
+        (user: User) => {
+            localStorage.setItem("@GoBarber:user", JSON.stringify(user));
 
-        setData({
-            token: data.token,
-            user,
-        });
-    }, [setData, data.token])
+            setData({
+                token: data.token,
+                user,
+            });
+        },
+        [setData, data.token],
+    );
 
     return (
-        <AuthContext.Provider value={{ user: data.user, singIn, singOut, updateUser }}>
+        <AuthContext.Provider
+            value={{ user: data.user, signIn, signOut, updateUser }}
+        >
             {children}
         </AuthContext.Provider>
     );
