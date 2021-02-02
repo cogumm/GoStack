@@ -41,7 +41,7 @@ const SingUp: React.FC = () => {
   const navigation = useNavigation();
 
   const handleSignUp = useCallback(
-    async (data: SignUpFormData) => {
+    async (data: SingUpFormData) => {
       try {
         formRef.current?.setErrors({});
 
