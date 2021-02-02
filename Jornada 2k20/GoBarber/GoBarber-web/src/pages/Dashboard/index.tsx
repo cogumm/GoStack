@@ -52,7 +52,7 @@ const Dashboard: React.FC = () => {
 
     const [appointments, setAppointments] = useState<Appointment[]>([]);
 
-    const { singOut, user } = useAuth();
+    const { signOut, user } = useAuth();
     // console.log(user);
 
     const handleDateChange = useCallback(
@@ -169,7 +169,7 @@ const Dashboard: React.FC = () => {
                         </div>
                     </Profile>
 
-                    <button type="button" onClick={singOut}>
+                    <button type="button" onClick={signOut}>
                         <FiPower />
                     </button>
                 </HeaderContent>

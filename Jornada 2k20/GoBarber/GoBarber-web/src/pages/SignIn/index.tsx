@@ -26,7 +26,7 @@ const SignIn: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
     // Hook de context
-    const { singIn } = useAuth();
+    const { signIn } = useAuth();
     // console.log(auth);
     // console.log(user);
     const { addToast } = useToast();
@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
                     abortEarly: false,
                 });
 
-                await singIn({
+                await signIn({
                     email: data.email,
                     password: data.password,
                 });
@@ -74,7 +74,7 @@ const SignIn: React.FC = () => {
                 });
             }
         },
-        [singIn, addToast, history],
+        [signIn, addToast, history],
     );
     return (
         <Container>
