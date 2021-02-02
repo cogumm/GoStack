@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import Icons from 'react-native-vector-icons/Feather';
+/**
+ * Image-picker está com a versão 2.3.4 fixa para esta versão do GoBarber
+ */
+import ImagePicker from 'react-native-image-picker';
 
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
@@ -67,7 +71,7 @@ const Profile: React.FC = () => {
           old_password: Yup.string(),
           password_confirmation: Yup.string()
             .when('old_password', {
-              is: (val: string | any[]) => !!val.length,
+              is: val => !!val.length,
               then: Yup.string().required('Campo obrigatório.'),
               otherwise: Yup.string(),
             })
@@ -121,8 +125,47 @@ const Profile: React.FC = () => {
         );
       }
     },
-    [navigation],
+    [navigation, updateUser],
   );
+
+  /**
+   * Função para atualização do avatar do usuário.
+   */
+  const handleUpdateAvatar = useCallback(() => {
+    ImagePicker.showImagePicker(
+      {
+        title: 'Selecione um avatar.',
+        cancelButtonTitle: 'Cencelar',
+        takePhotoButtonTitle: 'Usar a câmera',
+        chooseFromLibraryButtonTitle: 'Escolher da galeria',
+      },
+      res => {
+        if (res.didCancel) {
+          return;
+        }
+
+        if (res.error) {
+          Alert.alert('Erro ao atualizar seu avatar.');
+          return;
+        }
+
+        // const source = { uri: res.uri };
+        // console.log(source);
+
+        const data = new FormData();
+
+        data.append('avatar', {
+          type: 'image/jpeg',
+          name: `${user.id}.jpg`,
+          uri: res.uri,
+        });
+
+        api.patch('users/avatar', data).then(apiRes => {
+          updateUser(apiRes.data);
+        });
+      },
+    );
+  }, [updateUser, user.id]);
 
   const handleGoBack = useCallback(() => {
     navigation.goBack();
@@ -144,7 +187,7 @@ const Profile: React.FC = () => {
               <Icons name="chevron-left" size={24} color="#999591" />
             </BackButton>
 
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
             </UserAvatarButton>
             <View>
