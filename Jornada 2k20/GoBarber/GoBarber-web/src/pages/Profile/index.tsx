@@ -55,7 +55,8 @@ const Profile: React.FC = () => {
                             is: val => !!val.length,
                             then: Yup.string().required("Campo obrigatório."),
                             otherwise: Yup.string(),
-                        }).oneOf(
+                        })
+                        .oneOf(
                             [Yup.ref("password")],
                             "Senhas não são parecidas.",
                         ),
@@ -78,14 +79,13 @@ const Profile: React.FC = () => {
                     email,
                     // Se o campo old_password estiver preenchido, ele envia os campos se não envia vazio.
                     ...(old_password
-                      ? {
-                          old_password,
-                          password,
-                          password_confirmation,
-                        }
-                    : {}),
+                        ? {
+                              old_password,
+                              password,
+                              password_confirmation,
+                          }
+                        : {}),
                 };
-
 
                 const res = await api.put("/profile", formData);
                 updateUser(res.data);
@@ -96,8 +96,7 @@ const Profile: React.FC = () => {
                 addToast({
                     type: "success",
                     title: "Perfil atualizado.",
-                    description:
-                        "Perfil atualizado com sucesso.",
+                    description: "Perfil atualizado com sucesso.",
                 });
             } catch (err) {
                 if (err instanceof Yup.ValidationError) {
@@ -116,35 +115,38 @@ const Profile: React.FC = () => {
                 });
             }
         },
-        [addToast, history],
+        [addToast, updateUser, history],
     );
 
     // Função para alterar o avatar.
-    const handleAvatarChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files) {
-            const data = new FormData();
+    const handleAvatarChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            if (e.target.files) {
+                const data = new FormData();
 
-            data.append("avatar", e.target.files[0]);
-            // console.log(e.target.files[0]);
+                data.append("avatar", e.target.files[0]);
+                // console.log(e.target.files[0]);
 
-            api.patch("/users/avatar", data).then((res) => {
-                updateUser(res.data);
+                api.patch("/users/avatar", data).then(res => {
+                    updateUser(res.data);
 
-                addToast({
-                    type: "success",
-                    title: "Avatar atualizado!",
-                })
-            });
-        }
-    }, [addToast, updateUser]);
+                    addToast({
+                        type: "success",
+                        title: "Avatar atualizado!",
+                    });
+                });
+            }
+        },
+        [addToast, updateUser],
+    );
 
     return (
         <Container>
             <header>
                 <div>
-                <Link to="/dashboard">
-                    <FiArrowLeft />
-                </Link>
+                    <Link to="/dashboard">
+                        <FiArrowLeft />
+                    </Link>
                 </div>
             </header>
 
@@ -162,23 +164,18 @@ const Profile: React.FC = () => {
                         <label htmlFor="avatar">
                             <FiCamera />
 
-                            <input type="file" id="avatar" onChange={handleAvatarChange} />
+                            <input
+                                type="file"
+                                id="avatar"
+                                onChange={handleAvatarChange}
+                            />
                         </label>
-
                     </AvatarInput>
 
                     <h1>Meu perfil</h1>
 
-                    <Input
-                        name="name"
-                        icon={FiUser}
-                        placeholder="Seu nome"
-                    />
-                    <Input
-                        name="email"
-                        icon={FiMail}
-                        placeholder="E-mail"
-                    />
+                    <Input name="name" icon={FiUser} placeholder="Seu nome" />
+                    <Input name="email" icon={FiMail} placeholder="E-mail" />
 
                     <Input
                         containerStyle={{ marginTop: 24 }}
