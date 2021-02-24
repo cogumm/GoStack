@@ -9,26 +9,27 @@ export default [
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
 
-        logging: process.env.DB_PG_LOGGING,
+        logging: process.env.DB_LOGGING,
         logger: "advanced-console",
-        migrationsRun: process.env.DB_PG_MIGRATIONS_RUN,
-        acquireTimeout: process.env.DB_PG_TIMEOUT,
-        synchronize: process.env.DB_PG_SYNCHRONIZE,
+        migrationsRun: process.env.DB_MIGRATIONS_RUN,
+        acquireTimeout: process.env.DB_TIMEOUT,
+        synchronize: process.env.DB_SYNCHRONIZE,
 
         charset: "utf8mb4",
         collation: "utf8mb4_general_ci",
+        // https://stackoverflow.com/questions/35553432/error-handshake-inactivity-timeout-in-node-js-mysql-module
         keepConnectionAlive: true,
 
-        entities: [process.env.DB_PG_ENTITIES],
-        migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
+        entities: [process.env.DB_ENTITIES],
+        migrations: [process.env.DB_MIGRATIONS],
         cli: {
-            migrationsDir: "./src/shared/infra/typeorm/migrations",
+            migrationsDir: process.env.DB_MIGRATIONSDIR,
         },
 
         rejectUnauthorized: true,
-        extra: {
-            ssl: process.env.DB_PG_SSL,
-        },
+        // extra: {
+        //     ssl: process.env.DB_SSL,
+        // },
     },
     {
         name: "mongo",
